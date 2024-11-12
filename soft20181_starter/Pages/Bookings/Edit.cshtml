@@ -1,0 +1,35 @@
+﻿@page
+@model soft20181_starter.Pages.Bookings.EditModel
+@{
+    ViewData["Title"] = "Edit the Booking";
+}
+
+<div class="contact-form">
+
+    <div>
+        <form method="post" class="row g-2">
+            <div class="form-element col-md-9" hidden>
+                <label class="form-label">User Id</label>
+                <input asp-for="@Model.TheBooking.UserId" type="text" placeholder="User Id" readonly/>
+            </div>
+            <div class="form-element col-md-12" hidden>
+                <label class="form-label">EventId </label>
+                <input asp-for="@Model.TheBooking.EventId" type="number" placeholder="Event Id" readonly />
+            </div>
+            <div class="form-element">
+                <label class="form-label">For Event: @Model.Event.Title</label>
+            </div>
+            <div class="form-element">
+                <label class="form-label">For User: @Model.TheUser.Email</label>
+            </div>
+
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">New Number of Tickets: </label>
+                <input min="1" asp-for="@Model.TheBooking.quantity" type="number" placeholder="New Number Of Tickets" value="@Model.TheBooking.quantity" />
+                <span asp-validation-for="@Model.TheBooking.quantity"></span>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>

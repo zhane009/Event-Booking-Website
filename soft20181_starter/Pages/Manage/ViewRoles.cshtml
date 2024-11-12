@@ -1,0 +1,74 @@
+﻿@page
+@model soft20181_starter.Pages.Manage.ViewRolesModel
+@{
+    ViewData["Title"] = "View All Roles";
+}
+
+<br />
+<br />
+
+@if (Model.Edit)
+{
+    <div class="alert alert-success">
+        The role name has been changed successfully!
+    </div>
+}
+else if (Model.Add)
+    {
+        <div class="alert alert-success">
+            A new role has been added successfully!
+        </div>
+    }
+
+else if (Model.Delete)
+{
+    <div class="alert alert-success">
+        The role has been deleted successfully!
+    </div>
+}
+
+<div classs="event-details">
+    <div class="details-details">
+
+        <h2>View All User Details</h2>
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Role Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < @Model.Roles.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model.Roles[i].Name</td>
+                        <td>
+                            <a asp-page="EditRole" asp-route-id="@Model.Roles[i].Id">
+                                <button class="btn btn-primary">
+                                    Edit
+                                </button>
+                            </a>
+                            <a asp-page="EditRole" asp-page-handler="delete" asp-route-id="@Model.Roles[i].Id">
+                                <button class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <a asp-page="AddRole">
+            <button class="btn btn-primary">
+                Add a New Role
+            </button>
+        </a>
+
+    </div>
+</div>

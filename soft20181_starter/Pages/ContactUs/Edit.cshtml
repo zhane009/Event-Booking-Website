@@ -1,0 +1,45 @@
+﻿@page
+@model soft20181_starter.Pages.ContactUs.EditModel
+@{
+    ViewData["Title"] = "Edit the Contact Response";
+}
+
+<div class="contact-form">
+    <h2>Edit the contact message </h2>
+    <div>
+        <form method="post" class="row g-2">
+
+            <div class="form-element col-md-12">
+                <input asp-for="@Model.ContactInfo.Id" type="text" placeholder="Id" readonly />
+            </div>
+
+            <div class="form-element col-md-12">
+                <input asp-for="@Model.ContactInfo.FirstName" type="text" placeholder="First Name" />
+                <span asp-validation-for="@Model.ContactInfo.FirstName"></span>
+            </div>
+
+            <div class="form-element col-md-12">
+                <input asp-for="@Model.ContactInfo.LastName" type="text" placeholder="Last Name" />
+                <span asp-validation-for="@Model.ContactInfo.LastName"></span>
+            </div>
+
+            <div class="form-element col-md-12">
+                <input asp-for="@Model.ContactInfo.Email" type="text" placeholder="Email" />
+                <span asp-validation-for="@Model.ContactInfo.Email"></span>
+            </div>
+
+            <div class="form-element col-md-12">
+                <input asp-for="@Model.ContactInfo.Phone" type="text" placeholder="Phone" />
+                <span asp-validation-for="@Model.ContactInfo.Phone"></span>
+            </div>
+
+            <div class="form-element col-md-12">
+                <textarea asp-for="@Model.ContactInfo.Message" placeholder="Message"></textarea>
+                <span asp-validation-for="@Model.ContactInfo.Message"></span>
+            </div>
+
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>

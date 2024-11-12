@@ -1,0 +1,106 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+<br />
+<div class="index-container">
+    <img class="background" src="images/index-background.jpg" alt="trilogy">
+    <div class="text-on-background fadeInUp-animation">
+        <p>
+            We live for the nights nobody remembers, with people we will never forget.
+        </p>
+        <a asp-page="AllEvents/Index">
+            <button class="btn1" href>
+                Explore all Events now!
+            </button>
+        </a>
+
+    </div>
+
+</div>
+
+<section class="desc">
+
+    <img src="images/books.jpg">
+    <h2>From book events to big raves, all you need in one place</h2>
+    <article>
+        Discover all events and their details. Explore events that suit to your needs from our list of events.
+    </article>
+
+</section>
+@* <div class="text-lg-center m-3">
+    <h1>Popular Events</h1>
+</div> *@
+@* <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    @for (int i = 0; i < 3; i++)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <img src="~/images/@Model.EventInfo[i].Image" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.EventInfo[i].Title</h5>
+                    <p class="card-text">@Model.EventInfo[i].Brief</p>
+                </div>
+                <div class="card-footer">
+                    <button>
+                        <a asp-page="EventDetails" asp-route-id="@Model.EventInfo[i].Id">Find Out More</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div> *@
+<div class="blog-home2 py-5">
+    <div class="container">
+        <!-- Row  -->
+        <div class="row justify-content-center">
+            <!-- Column -->
+            <div class="col-md-8 text-center">
+                <h3 class="my-3">Featured Events</h3>
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+        </div>
+        <div class="row mt-4">
+            <!-- Column -->
+            @{
+                List<int> generatedNumbers = new List<int>();
+
+                Random r = new Random();
+                for (int i = 0; i < 3; i++)
+                {
+                    int num = r.Next(0, Model.EventInfo.Count);
+
+                    while (generatedNumbers.Contains(num))
+                    {
+                        num = r.Next(0, Model.EventInfo.Count);
+                    }
+                    generatedNumbers.Add(num);
+
+                    Model.Date = Model.EventInfo[num].Date.Split(" ");
+                
+                    <div class="col-md-4 on-hover">
+                        <div class="card border-0 mb-4">
+                            <a asp-page="/EventDetails" asp-route-id="@Model.EventInfo[num].Id"><img class="card-img-top" src="~/images/@Model.EventInfo[num].Image" alt="@Model.EventInfo[num].Title"></a>
+                            <div class="date-pos bg-info-gradiant p-2 d-inline-block text-center rounded text-white position-absolute">@Model.Date[1]<span class="d-block">@Model.Date[0]</span></div>
+                            <h5 class="font-weight-medium mt-3"><a asp-page="/EventDetails" asp-route-id="@Model.EventInfo[num].Id" class="text-decoration-none link">@Model.EventInfo[num].Title</a></h5>
+                            <p class="mt-3">@Model.EventInfo[num].FullLocation</p>
+                            <a asp-page="/EventDetails" asp-route-id="@Model.EventInfo[num].Id" class="text-decoration-none linking text-themecolor mt-2">Learn More</a>
+                        </div>
+                    </div>
+
+                    if (i == 2)
+                    {
+                        generatedNumbers.Clear();
+                    }
+                }
+            }
+            <!-- Column -->
+            
+        </div>
+    </div>
+</div>

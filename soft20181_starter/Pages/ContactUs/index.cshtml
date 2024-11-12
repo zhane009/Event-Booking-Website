@@ -1,0 +1,54 @@
+﻿@page
+@model ContactModel
+@{
+    ViewData["Title"] = "Contact Us";
+}
+<script>
+    function clearForm() {
+        document.getElementById("form1").reset(); // Assuming the form ID is form1
+    }
+</script>
+
+<div class="contact-form">
+    <h2 class="header">Leave a Message</h2>
+
+    @if (Model.IsSuccess)
+    {
+        <div class="success">@Model.Message</div>
+    }
+    
+    <div>
+        <form method="post" class="row g-2" id="form">
+            <div class="form-element col-md-6">
+                <input asp-for="@Model.ContactInfo.FirstName" type="text" placeholder="First Name"/>
+                <span asp-validation-for="@Model.ContactInfo.FirstName"></span>
+            </div>
+
+            <div class="form-element col-md-6">
+                <input asp-for="@Model.ContactInfo.LastName" type="text" placeholder="Last Name"/>
+                <span asp-validation-for="@Model.ContactInfo.LastName"></span>
+            </div>
+
+            <div class="form-element col-md-6">
+                <input asp-for="@Model.ContactInfo.Email" type="text" placeholder="Email"/>
+                <span asp-validation-for="@Model.ContactInfo.Email"></span>
+            </div>
+
+            <div class="form-element col-md-6">
+                <input asp-for="@Model.ContactInfo.Phone" type="text" placeholder="Phone"/>
+                <span asp-validation-for="@Model.ContactInfo.Phone"></span>
+            </div>
+
+            <div class="form-element col-md-12">
+                <textarea asp-for="@Model.ContactInfo.Message" placeholder="Message"></textarea>
+                <span asp-validation-for="@Model.ContactInfo.Message"></span>
+            </div>
+
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+

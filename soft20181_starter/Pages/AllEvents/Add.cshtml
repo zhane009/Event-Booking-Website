@@ -1,0 +1,92 @@
+﻿@page
+@model soft20181_starter.Pages.AllEvents.AddModel
+@{
+    ViewData["Title"] = "Add a new event";
+}
+
+<div class="contact-form">
+    <h2>Add a new event</h2>
+    <div>
+        <form method="post" class="row g-2" enctype="multipart/form-data">
+            @* <div class="form-element col-md-12">
+                <label class="form-label">Event Id</label>
+                <input asp-for="@Model.TheEvent.Id" type="text" placeholder="Event Id" />
+            </div> *@
+
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Title </label>
+                <input asp-for="@Model.TheEvent.Title" type="text" placeholder="Title" />
+                <span asp-validation-for="@Model.TheEvent.Title"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Brief</label>
+                <textarea asp-for="@Model.TheEvent.Brief" type="text" placeholder="Brief"></textarea>
+                <span asp-validation-for="@Model.TheEvent.Brief"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Description </label>
+                <textarea asp-for="@Model.TheEvent.FullDescription" type="text" placeholder="Description"></textarea>
+                <span asp-validation-for="@Model.TheEvent.FullDescription"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Category</label>
+                @* <input asp-for="@Model.TheEvent.Category" type="text" placeholder="Category" />
+                <span asp-validation-for="@Model.TheEvent.Category"></span> *@
+                <select asp-for="@Model.TheEvent.Category" class="form-select" aria-label="Choose a category">
+                    <option selected>Choose a category</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category">@category</option>
+                    }
+                </select>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Short-form Date </label>
+                <input asp-for="@Model.TheEvent.Date" type="text" placeholder="2nd Feb, 2024" />
+                <span asp-validation-for="@Model.TheEvent.Date"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Full Date</label>
+                <input asp-for="@Model.TheEvent.FullDate" type="text" placeholder="2nd February, 2024" />
+                <span asp-validation-for="@Model.TheEvent.FullDate"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Time </label>
+                <input asp-for="@Model.TheEvent.Time" type="text" placeholder="7:00pm" />
+                <span asp-validation-for="@Model.TheEvent.Time"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Short-form Location </label>
+                <input asp-for="@Model.TheEvent.Location" type="text" placeholder="Nottingham, UK" />
+                <span asp-validation-for="@Model.TheEvent.LocationUrl"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Location URL</label>
+                <input asp-for="@Model.TheEvent.LocationUrl" type="text" placeholder="https://maps.app.goo.gl/...." />
+                <span asp-validation-for="@Model.TheEvent.LocationUrl"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Full Location </label>
+                <input asp-for="@Model.TheEvent.FullLocation" type="text" placeholder="Motorpoint Arena, Nottingham, UK" />
+                <span asp-validation-for="@Model.TheEvent.FullLocation"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Price </label>
+                <input asp-for="@Model.TheEvent.Price" type="text" placeholder="Starting From $..." />
+                <span asp-validation-for="@Model.TheEvent.Price"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Image</label>
+                <input type="file" name="ImageUpload" runat="server" />
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Age Restriction </label>
+                <input asp-for="@Model.TheEvent.AgeGroup" type="text" placeholder="18+" />
+                <span asp-validation-for="@Model.TheEvent.AgeGroup"></span>
+            </div>
+
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>

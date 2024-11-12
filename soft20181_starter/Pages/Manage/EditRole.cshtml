@@ -1,0 +1,32 @@
+﻿@page
+@model soft20181_starter.Pages.Manage.EditRoleModel
+@{
+    ViewData["Title"] = "Edit the Role - " + Model.Role.Name;
+}
+
+<div class="contact-form">
+    <h2>Change Role Name</h2>
+    <div>
+        <form method="post" class="row g-2">
+
+@*             <div class="form-element col-md-12">
+                <input asp-for="@Model.Role.Id" type="text" value="@Model.Role.Id" readonly hidden/>
+                <span asp-validation-for="@Model.Role.Id"></span>
+            </div> *@
+
+            <div class="form-element col-md-12">
+                <label class="form-label">Current Role Name </label>
+                <input asp-for="@Model.Role.Name" type="text" value="@Model.Role.Name" readonly />
+                <span asp-validation-for="@Model.Role.Name"></span>
+            </div>
+
+            <div class="form-element col-md-12">
+                <label class="form-label">New Role Name </label>
+                <input asp-for="@Model.NewRole" type="text" value="@Model.NewRole" />
+                <span asp-validation-for="@Model.NewRole"></span>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>

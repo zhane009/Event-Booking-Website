@@ -1,0 +1,86 @@
+﻿@page
+@model soft20181_starter.Pages.AllEvents.EditModel
+@{
+    ViewData["Title"] = "Edit Event - " + Model.TheEvent.Title;
+}
+
+
+<div class="contact-form">
+    <h2>Edit Details for The Event - @Model.TheEvent.Title</h2>
+    <div>
+        <form method="post" class="row g-2" enctype="multipart/form-data">
+            <div class="form-element col-md-12" >
+                <label class="form-label">Event Id</label>
+                <input asp-for="@Model.TheEvent.Id" type="text" placeholder="Event Id" readonly/>
+            </div>
+
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Title </label>
+                <input asp-for="@Model.TheEvent.Title" type="text" placeholder="New Title" value="@Model.TheEvent.Title" />
+                <span asp-validation-for="@Model.TheEvent.Title"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Brief</label>
+                <textarea asp-for="@Model.TheEvent.Brief" type="text" placeholder="New Brief" value="@Model.TheEvent.Brief"></textarea>
+                <span asp-validation-for="@Model.TheEvent.Brief"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Description </label>
+                <textarea asp-for="@Model.TheEvent.FullDescription" type="text" placeholder="New Description" value="@Model.TheEvent.FullDescription"></textarea>
+                <span asp-validation-for="@Model.TheEvent.FullDescription"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Category</label>
+                <input asp-for="@Model.TheEvent.Category" type="text" placeholder="New Title" value="@Model.TheEvent.Category" />
+                <span asp-validation-for="@Model.TheEvent.Category"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Short-form Date </label>
+                <input asp-for="@Model.TheEvent.Date" type="text" placeholder="New Title" value="@Model.TheEvent.Date" />
+                <span asp-validation-for="@Model.TheEvent.Date"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Full Date</label>
+                <input asp-for="@Model.TheEvent.FullDate" type="text" placeholder="New Title" value="@Model.TheEvent.FullDate" />
+                <span asp-validation-for="@Model.TheEvent.FullDate"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Time </label>
+                <input asp-for="@Model.TheEvent.Time" type="text" placeholder="New Title" value="@Model.TheEvent.Time" />
+                <span asp-validation-for="@Model.TheEvent.Time"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Short-form Location </label>
+                <input asp-for="@Model.TheEvent.Location" type="text" placeholder="New Title" value="@Model.TheEvent.Location" />
+                <span asp-validation-for="@Model.TheEvent.LocationUrl"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Location URL</label>
+                <input asp-for="@Model.TheEvent.LocationUrl" type="text" placeholder="New Title" value="@Model.TheEvent.LocationUrl" />
+                <span asp-validation-for="@Model.TheEvent.LocationUrl"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Full Location </label>
+                <input asp-for="@Model.TheEvent.FullLocation" type="text" placeholder="New Title" value="@Model.TheEvent.FullLocation" />
+                <span asp-validation-for="@Model.TheEvent.FullLocation"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Price </label>
+                <input asp-for="@Model.TheEvent.Price" type="text" placeholder="New Title" value="@Model.TheEvent.Price" />
+                <span asp-validation-for="@Model.TheEvent.Price"></span>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Image</label>
+                <input type="file" name="ImageUpload" value="~/images/@Model.TheEvent.Image" runat="server"/>
+            </div>
+            <div class="form-element col-md-12">
+                <label class="form-label" for="typeNumber">Age Restriction </label>
+                <input asp-for="@Model.TheEvent.AgeGroup" type="text" placeholder="New Title" value="@Model.TheEvent.AgeGroup" />
+                <span asp-validation-for="@Model.TheEvent.AgeGroup"></span>
+            </div>
+
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>

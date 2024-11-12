@@ -1,0 +1,72 @@
+﻿@page
+@model soft20181_starter.Pages.Bookings.ViewBookedUsersByEvent
+@{
+    ViewData["Title"] = "View all Bookings for Event - " + Model.TheEvent.Title;
+}
+
+<br />
+<br />
+
+@if (Model.delete)
+{
+    <div class="alert alert-success" role="alert">
+        Booking deleted successfully!
+    </div>
+    Model.delete = false;
+}
+
+else if (Model.edit)
+{
+    <div class="alert alert-success" role="alert">
+        Booking edited successfully!
+    </div>
+    Model.edit= false;
+}
+
+<div classs="event-details">
+    <div class="details-details">
+
+        <h2>All Bookings for Event - @Model.TheEvent.Title</h2>
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Number of Tickets</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < @Model.Bookings.Count; i++)
+                {
+                    var parms = new Dictionary<string, string>
+                    {
+                        { "id", Model.TheEvent.Id.ToString() },
+                        { "userid", Model.Bookings[i].UserId.ToString() }
+                    };
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model.Users[i].Email</td>
+                        <td>@Model.Bookings[i].quantity</td>
+                        <td>
+
+                            <a asp-page="Edit" asp-all-route-data="@parms">
+                                <button class="btn btn-primary">
+                                    Edit
+                                </button>
+                            </a>
+
+                            <a asp-page="View" asp-page-handler="delete" asp-asp-all-route-data="@parms">
+                                <button class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </a>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

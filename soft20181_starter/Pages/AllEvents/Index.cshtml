@@ -1,0 +1,277 @@
+﻿@page
+@model soft20181_starter.Pages.AllEvents.IndexModel
+@{
+    ViewData["Title"] = "All Events";
+}
+
+<br />
+<br />
+
+@if (@Model.booked)
+{
+    <div class="alert alert-success" role="alert">
+        Event Booked Successfully
+    </div>
+    
+    Model.booked = false;
+
+}
+else if (@Model.added)
+{
+    <div class="alert alert-success" role="alert">
+        Event Added
+    </div>
+    
+    Model.added = false;
+}
+
+
+<section class="content">
+    <img src="~/images/fireworks.jpg" alt="fireworks">
+
+    <div class="text-on-background-events">
+        <p>
+            Choose Your Event Now!
+        </p>
+        <button class="btn1" id="scroll">
+            Explore all Events now!
+        </button>
+
+    </div>
+</section>
+
+
+
+<section class="eventbox" id="eventbox">
+    <div>
+        <h2>All Events</h2>
+    </div>
+    <div class="search">
+        <div>
+            <form action="#" onsubmit="return false">
+                <input type="text"
+                       placeholder=" Search Events..."
+                       name="search"
+                       id="search-bar">
+                <!-- <span class="fa fa-search"></span> -->
+                <!-- <button>
+                    <i class="fa fa-search"
+                       style="font-size: 18px;">
+                    </i>
+                </button> -->
+            </form>
+        </div>
+
+        <div>
+            <h4>Filter By: </h4>
+        </div>
+
+        <div>
+            <form>
+                <select name="category" id="category" class="form-select">
+                    <option value="all">All</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category">@category</option>
+                    }
+                </select>
+            </form>
+        </div>
+        
+    </div>
+    <div class="events">
+        @* <div class="event" id="event1">
+            <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+            <div class="overlay"></div>
+            <div class="overlay-text">
+                <h3 class="eventTitle">Winter Wonderland</h3>
+                <p class="eventDesc" id="description">Christmas comes to Nottingham with a brand-new ice-rink trail, observation wheel, market stalls, ice bar and your favourite food &amp; beverages.</p>
+                <p class="eventDesc" id="location">Nottingham, UK</p>
+                <p class="eventDesc" id="date">7th Nov - 31st Dec</p>
+            </div>
+        </div> *@
+        
+            @for (int i = 0; i < Model.EventInfo.Count; i+=2)
+            {
+                if (i == Model.EventInfo.Count - 1)
+                {
+                    <div class="event-row">
+                        <a asp-page="/EventDetails" asp-route-id="@Model.EventInfo[i].Id" >
+                        <div class="event @Model.EventInfo[i].Category">
+                                <img class="eventImage" src="~/images/@Model.EventInfo[i].Image" />
+                                <div class="overlay"></div>
+                                <div class="overlay-text">
+                                    <h3 class="eventTitle">@Model.EventInfo[i].Title</h3>
+                                    <p class="eventDesc" id="description">@Model.EventInfo[i].Brief</p>
+                                    <p class="eventDesc" id="location">@Model.EventInfo[i].Location</p>
+                                    <p class="eventDesc" id="date">@Model.EventInfo[i].Date</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }                                                                                                                                                                                                                       
+                else
+                {
+                    <div class="event-row">
+                        <a asp-page="/EventDetails" asp-route-id="@Model.EventInfo[i].Id" class="@Model.EventInfo[i].Category">
+                            <div class="event @Model.EventInfo[i].Category">
+                                <img class="eventImage" src="~/images/@Model.EventInfo[i].Image" />
+                                <div class="overlay"></div>
+                                <div class="overlay-text">
+                                    <h3 class="eventTitle">@Model.EventInfo[i].Title</h3>
+                                    <p class="eventDesc" id="description">@Model.EventInfo[i].Brief</p>
+                                    <p class="eventDesc" id="location">@Model.EventInfo[i].Location</p>
+                                    <p class="eventDesc" id="date">@Model.EventInfo[i].Date</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a asp-page="/EventDetails" asp-route-id="@Model.EventInfo[i+1].Id" class="@Model.EventInfo[i+1].Category">
+                            <div class="event @Model.EventInfo[i + 1].Category">
+                                <img class="eventImage" src="~/images/@Model.EventInfo[i+1].Image" />
+                                <div class="overlay"></div>
+                                <div class="overlay-text">
+                                    <h3 class="eventTitle">@Model.EventInfo[i+1].Title</h3>
+                                    <p class="eventDesc" id="description">@Model.EventInfo[i+1].Brief</p>
+                                    <p class="eventDesc" id="location">@Model.EventInfo[i+1].Location</p>
+                                    <p class="eventDesc" id="date">@Model.EventInfo[i+1].Date</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        
+
+       @*  <a asp-page="EventDetails">
+            <div class="event" id="event1">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">Winter Wonderland</h3>
+                    <p class="eventDesc" id="description">Christmas comes to Nottingham with a brand-new ice-rink trail, observation wheel, market stalls, ice bar and your favourite food &amp; beverages.</p>
+                    <p class="eventDesc" id="location">Nottingham, UK</p>
+                    <p class="eventDesc" id="date">7th Nov - 31st Dec</p>
+                </div>
+            </div>
+        </a>
+        <a href="eventDetails.html?event=event2">
+            <div class="event" id="event2">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">Local Fires X The Bygones Book Tour</h3>
+                    <p class="eventDesc" id="description">Jim Gibson &amp; Joshua Jones read from their acclaimed short story collections.</p>
+                    <p class="eventDesc" id="location">Nottingham, UK</p>
+                    <p class="eventDesc" id="date">14th Dec</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="event-row">
+        <a href="eventDetails.html?event=event3">
+            <div class="event" id="event3">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">Show What I Have - The 1st World Tour</h3>
+                    <p class="eventDesc" id="description">Catch IVE, the girl group in their first world tour, Show What I Have.</p>
+                    <p class="eventDesc" id="location">London, UK</p>
+                    <p class="eventDesc" id="date">16th June, 2024</p>
+                </div>
+            </div>
+        </a>
+        <a href="eventDetails.html?event=event4">
+            <div class="event" id="event4">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">Trilogy</h3>
+                    <p class="eventDesc" id="description">One of the undisputed biggest acts in electronic music today – ILLENIUM – is bringing his renowned Trilogy concert series to Los Angeles.</p>
+                    <p class="eventDesc" id="location">Los Angeles, US</p>
+                    <p class="eventDesc" id="date">2nd Feb 2024</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="event-row">
+        <a href="eventDetails.html?event=event5">
+            <div class="event" id="event5">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">Hyde Park Winter Wonderland</h3>
+                    <p class="eventDesc" id="description">Experience London's magical winter destination.</p>
+                    <p class="eventDesc" id="location">London, UK</p>
+                    <p class="eventDesc" id="date">18th Nov - 2nd Jan</p>
+                </div>
+            </div>
+        </a>
+        <a href="eventDetails.html?event=event6">
+            <div class="event" id="event6">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">Tomorrowland Winter</h3>
+                    <p class="eventDesc" id="description">Tomorrowland returned to Alpe d’Huez in 2023 for the third edition of Tomorrowland Winter.</p>
+                    <p class="eventDesc" id="location">Huez, France</p>
+                    <p class="eventDesc" id="date">16th Mar- 23rd Mar 2024</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="event-row">
+        <a href="eventDetails.html?event=event7">
+            <div class="event" id="event7">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">Ultra Music Festival</h3>
+                    <p class="eventDesc" id="description">The world's premier electronic music festival, boasting elite DJs and unparalleled production located in the beautiful city of Miami.</p>
+                    <p class="eventDesc" id="location">Miami, US</p>
+                    <p class="eventDesc" id="date">22nd Mar - 24th Mar 2024</p>
+                </div>
+            </div>
+        </a>
+        <a href="eventDetails.html?event=event8">
+            <div class="event" id="event8">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">Creamfields</h3>
+                    <p class="eventDesc" id="description">2024 will be no exception as the UK's one and only edition returns to the fields of Cheshire from 22nd - 25th August.</p>
+                    <p class="eventDesc" id="location">Daresbury, UK</p>
+                    <p class="eventDesc" id="date">22nd Aug - 25th Aug 2024</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="event-row">
+        <a href="eventDetails.html?event=event9">
+            <div class="event" id="event9">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">New Year's Eve Masquerade Ball</h3>
+                    <p class="eventDesc" id="description">Join us as we bid farewell to the year in extravagant fashion.</p>
+                    <p class="eventDesc" id="location">London, UK</p>
+                    <p class="eventDesc" id="date">31st Dec</p>
+                </div>
+            </div>
+        </a>
+        <a href="eventDetails.html?event=event10">
+            <div class="event" id="event10">
+                <img class="eventImage" src="~/images/illenium-trilogy.jpg">
+                <div class="overlay"></div>
+                <div class="overlay-text">
+                    <h3 class="eventTitle">OfficialKevents | KPOP &amp; KHIPHOP Night</h3>
+                    <p class="eventDesc" id="description">Get ready to dance the night away to the electrifying beats of your favorite KPop idols.</p>
+                    <p class="eventDesc" id="location">London, UK</p>
+                    <p class="eventDesc" id="date">5th Jan, 2024</p>
+                </div>
+            </div>
+        </a>
+    </div> *@
+           
+
+    </div>
+</section>

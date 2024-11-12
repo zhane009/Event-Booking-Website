@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    @*  Section for CSS Start *@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/soft20181_starter.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/96e6ec0a99.js" crossorigin="anonymous"></script>
+    <script src="~/js/site.js" defer></script>
+    @*  Section for CSS Start *@
+
+</head>
+<body>
+
+   @*  Header Section Start *@
+
+   @* <header>
+        <div>  
+            <ul class="navbar">
+                <li class="navbar_item">
+                    <a class = "navbar_btn" asp-page = "/Index">
+                        <img src="~/images/logo.jpg">
+                    </a>
+                </li>
+                <div class="navbar_item_right" >
+                    <li class="navbar_item">
+                        <a class="navbar_btn" asp-page="/Index">Home</a>
+                    </li>
+                    <li class = "navbar_item">
+                        <a class="navbar_btn" asp-page="/AllEvents">Events</a>
+                    </li>
+                    <li class="navbar_item">
+                        <a class="navbar_btn" asp-page="/ContactUs/Index">Contact Us</a>
+                    </li>
+
+                    <partial name="_LoginPartial" />
+                    <li class="navbar_item">
+                        
+                            <a id = "controlButton" class="fa-solid fa-user-gear navbar_btn">
+                                
+                            </a>
+                        <div class="control">
+                            <div class="buttons showControl-animation">
+                                <div class="column">
+                                    <div class="row">
+                                        <button style="background-color: skyblue; color: dodgerblue"></button>
+                                        <button style="background-color: yellow; color: orange"></button>
+                                        <button style="background-color: #ff004e; color: #ff8d00"></button>
+                                        
+                                    </div>
+                    
+                                    <div class="row">
+                                        <button style="background-color: yellowgreen; color: yellow"></button>
+                                        <button style="background-color: orange; color: yellowgreen"></button>
+                                        <button style="background-color: #8e00ff; color: #ff00e8"></button>
+                                    </div>
+                    
+                                    <div class="row2">
+                                        <button id="dark-mode">
+                                            <a class="fa-solid fa-moon"></a>
+                                        </button>
+                                        <button id="font-incre">
+                                            <a >A+</a>
+                                        </button>
+                                        <button id="font-reset">
+                                            <a >A</a>
+                                        </button>
+                                        <button id="font-decre">
+                                            <a >A-</a>
+                                        </button>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </li>
+                    <li class="navbar_item icon">
+                        <a class="navbar_btn fa fa-bars"></a>
+                    </li>
+                </div>
+            </ul>
+        </div> 
+    </header> *@
+@*     <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">LOGO</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ContactUs/Index">Contact Us</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>   
+    </header> *@
+    <nav class="navbar navbar-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-page="/Index">
+                <img src="~/images/logo.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler navbar_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    @{
+                        if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                                ADMIN MENU
+                            </h5>
+                        }
+                        else
+                        {
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                                MENU
+                            </h5>
+                        }
+                    }
+                    
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="navbar_item">
+                            <a class="navbar_btn" aria-current="page" asp-page="/Index">Home</a>
+                        </li>
+                        @{
+                            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <li class="navbar_item dropdown align-self-center">
+                                    <a class="navbar_btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                         All Events
+                                    </a>
+                                    <ul class="dropdown-menu navbar_item bg-transparent border-0" aria-labelledby="navbarDropdown">
+                                        <li class="navbar_item"><a class="navbar_btn" asp-page="/AllEvents/Index">Normal View</a></li>
+                                        <li class="navbar_item"><a class="navbar_btn" asp-page="/AllEvents/Add">Add</a></li>
+                                        <li class="navbar_item"><a class="navbar_btn" asp-page="/AllEvents/View">Admin View</a></li>
+                                    </ul>
+                                </li>
+                                <li class="navbar_item dropdown align-self-center">
+                                    <a class="navbar_btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Contact Us
+                                    </a>
+                                    <ul class="dropdown-menu navbar_item bg-transparent border-0" aria-labelledby="navbarDropdown">
+                                        <li class="navbar_item"><a class="navbar_btn" asp-page="/ContactUs/Index">Normal View</a></li>
+                                        <li class="navbar_item"><a class="navbar_btn" asp-page="/ContactUs/View">Admin View</a></li>
+                                    </ul>
+                                </li>
+                                <li class="navbar_item">
+                                    <a class="navbar_btn" asp-page="/AdminPortal">Admin Portal</a>
+                                </li>
+                            }
+                            else {
+                                <li class="navbar_item">
+                                    <a class="navbar_btn" asp-page="/AllEvents/Index">Events</a>
+                                </li>
+                                <li class="navbar_item">
+                                    <a class="navbar_btn" asp-page="/ContactUs/Index">Contact Us</a>
+                                </li>
+                            }
+                        }
+
+                        <partial name="_LoginPartial" />
+                        <li class="navbar_item">
+
+                            <a id="controlButton" class="navbar_btn">
+                                Customise
+                            </a>
+                            <div class="control">
+                                <div class="buttons showControl-animation">
+                                    <div class="column">
+                                        <div class="control-row">
+                                            <button style="background-color: skyblue; color: dodgerblue"></button>
+                                            <button style="background-color: yellow; color: orange"></button>
+                                            <button style="background-color: #ff004e; color: #ff8d00"></button>
+
+                                        </div>
+
+                                        <div class="control-row">
+                                            <button style="background-color: yellowgreen; color: yellow"></button>
+                                            <button style="background-color: orange; color: yellowgreen"></button>
+                                            <button style="background-color: #8e00ff; color: #ff00e8"></button>
+                                        </div>
+
+                                        <div class="control-row2">
+                                            <button id="dark-mode">
+                                                <a class="fa-solid fa-moon"></a>
+                                            </button>
+                                            <button id="font-incre">
+                                                <a>A+</a>
+                                            </button>
+                                            <button id="font-reset">
+                                                <a>A</a>
+                                            </button>
+                                            <button id="font-decre">
+                                                <a>A-</a>
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+@*     <div class="fixed-bottom">
+        <button class="btn-cart">
+            <a asp-page="/Bookings/View">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+        </button>
+    </div> *@
+  
+    @*  Header Section End *@
+
+   
+
+@*     <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div> *@
+
+    @RenderBody()
+        
+
+    @*  Footer Section Start *@
+    <footer class="position:fixed">
+        <h2>Book an Event By zhane009</h2>
+        <p>
+            This website will help you explore events across the world.<br>
+        </p>
+
+        <div class="footerCnt">
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li>
+                        <a asp-page="/Index">Home</a>
+                    </li>
+                    <li>
+                        <a asp-page="/AllEvents/Index">Events</a>
+                    </li>
+                    <li>
+                        <a asp-page="/ContactUs/Index">Contact</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div>
+                <h3>Follow us on social media</h3>
+
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/zhane009" class="fa fa-facebook"></a>
+                    </li>
+                    <li>
+                        <a href="https://www.twitter.com/zhane009" class="fa fa-twitter"></a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/zhane009" class="fa fa-instagram"></a>
+                    </li>
+                    <li>
+                        <a href="https://www.threads.net/zhane009" class="fa-brands fa-threads"></a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            <p>copyright &copy;2024 <a href=""></a>. All rights reserved.</p>
+        </div>
+
+    </footer>
+    @*  Header Section End *@
+
+
+
+    @*  Add Site Wide JavaScript Start *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    @*  Add Site Wide JavaScript End *@
+
+
+    @*  Section for Scripts Start *@
+    @await RenderSectionAsync("Scripts", required: false)
+    @*  Section for Scripts End *@
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿@page
+@model soft20181_starter.Pages.AdminPortalModel
+@{
+    ViewData["Title"] = "Admin Portal";
+}
+<div class="container-details">
+    <div class="layout-details">
+        <div class="event-details ">
+            <div class="details-details">
+                <h1>Admin Protal</h1>
+                <p>Edit website information as an admin</p>
+
+            </div>
+            <div class="desc-box-details">
+                <h3>Users And Roles</h3>
+                <a asp-page="Manage/ViewUsers">
+                    <button class="btn btn-primary">
+                        View All User
+                    </button>
+                </a>
+                <a asp-page="Manage/ViewRoles">
+                    <button class="btn btn-primary">
+                        View All Roles
+                    </button>
+                </a>
+            </div>
+            <div class="desc-box-details">
+                <h3>Events</h3>
+                <a asp-page="AllEvents/View">
+                    <button class="btn btn-primary">
+                        View All Events
+                    </button>
+                </a>
+            </div>
+            <div class="desc-box-details">
+                <h3>Contact Messages</h3>
+                <a asp-page="ContactUs/View">
+                    <button class="btn btn-primary">
+                        View All Contact Messages
+                    </button>
+                </a>
+                
+            </div>
+            <div class="desc-box-details">
+                <h3>Bookings</h3>
+                <a asp-page="Manage/ViewBookingsCountByEvent">
+                    <button class="btn btn-primary">
+                        View All Bookings
+                    </button>
+                </a>
+                @foreach (var item in Model.Events)
+                {
+                    <a asp-page="Bookings/ViewBookedUsersByEvent" asp-route-id="@item.Id">
+                        <button class="btn btn-primary">
+                            View Booking details for Event - @item.Title
+                        </button>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+    
+</div>

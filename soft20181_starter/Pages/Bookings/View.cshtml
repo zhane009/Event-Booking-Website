@@ -1,0 +1,77 @@
+﻿@page
+@model Bookings.ViewModel
+@{
+    ViewData["Title"] = "View all Your Bookings";
+}
+<br />
+<br />
+
+@if (Model.delete)
+{
+    <div class="alert alert-success" role="alert">
+        Booking deleted successfully!
+    </div>
+    Model.delete = false;
+}
+
+else if (Model.edit)
+{
+    <div class="alert alert-success" role="alert">
+        Booking edited successfully!
+    </div>
+    Model.edit= false;
+}
+
+
+<div classs="event-details">
+    <div class="details-details">
+
+        <h2>All Bookings for User - @Model.TheUser.Email -- @Model.TheUser.firstName @Model.TheUser.lastName -- @Model.TheUser.dateOfBirth</h2>
+        
+        <table class="table">
+            
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Event</th>
+                    <th scope="col">Quality</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < @Model.Bookings.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i+1)</th>
+                        <td>@Model.BookedEventsList[i].Title</td>
+                        <td>@Model.Bookings[i].quantity</td>
+                        <td>
+
+                            <a asp-page="Edit" asp-route-id="@Model.Bookings[i].EventId">
+                                <button type="submit" class="btn btn-primary">
+                                    Edit
+                                </button>
+                            </a>
+
+                            <a asp-page-handler="delete" asp-route-id="@Model.Bookings[i].EventId">
+                                <button type="submit" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </a>
+                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <form method="post">
+            <button type="submit" class="btn btn-primary">
+                Generate your bookings as a pdf
+            </button>
+        </form>
+        
+        
+    </div>
+</div>
+
+

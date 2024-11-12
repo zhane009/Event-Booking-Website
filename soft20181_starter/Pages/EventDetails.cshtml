@@ -1,0 +1,193 @@
+﻿@page
+@model soft20181_starter.Pages.EventDetailsModel
+@{
+    ViewData["Title"] = "Details of Event - " + Model.TheEvent.Title;
+    bool displayed = false;
+}
+
+<div>
+    <section class="container-details">
+        <div class="layout-details">
+            <div class="event-details">
+                <div class="event-img-details">
+                    <img alt="Event Image" id="image" src="~/images/@Model.TheEvent.Image" />
+                </div>
+
+                <div class="details-details">
+
+                    <h1 id="event-name">@Model.TheEvent.Title</h1>
+
+                    <div class="all-info-details">
+                        <div class="info-details">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <p id="date">@Model.TheEvent.FullDate</p>
+                        </div>
+
+                        <div class="info-details">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p id="location">@Model.TheEvent.FullLocation</p>
+                            <a target="_blank" id="map" href="@Model.TheEvent.LocationUrl">
+                                <p>&emsp;(View on Map)</p>
+                            </a>
+                        </div>
+
+                        <div class="info-details">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                            <p id="price">@Model.TheEvent.Price</p>
+                        </div>
+
+                        <div class="info-details">
+                            <i class="fa-solid fa-user-lock"></i>
+                            <p>Age Restriction:&nbsp;</p>
+                            <p id="ageRestriction">@Model.TheEvent.AgeGroup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="desc-box-details">
+                    <h1>About</h1>
+                    <article id="description">
+                         @Model.TheEvent.FullDescription
+                    </article>
+                </div>
+
+                <div class="desc-box-details">
+                    <h1>Venue and Time</h1>
+                    <p id="venue">@Model.TheEvent.FullLocation</p>
+                    <p id="time">@Model.TheEvent.Time</p>
+                </div>
+
+                <div class="desc-box-details">
+                    <h1>Get Tickets</h1>
+
+                    @if (Model.Booked && Model.Clicked)
+                    {
+                        <h2 class="alert-success">Your booking has been made</h2>
+                    }
+                    else if (!Model.Booked && !Model.Clicked)
+                    {
+                        <h2 class="alert-success">You can book this event</h2>
+                        <button class="btn-details" id="book-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Book Now!
+                        </button>
+                    }
+                    else if (Model.Booked && !Model.Clicked)
+                    {
+                        <h2 class="alert-danger">You have already booked this event</h2>
+                    }
+                    else
+                    {
+                        
+                    }
+                    <div class="modal fade text-black" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Book the event</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form class="form-outline" method="post">
+                                    <div class="modal-body">
+                                    
+                                            <div class="form-element col-md-9">
+                                                <label class="form-label" for="typeNumber">Desired Number of Tickets: </label>
+                                                <input min="1" value="1" type="number" asp-for="@Model.numberOfTickets">
+                                                <span asp-validation-for="@Model.numberOfTickets"></span>
+                                            </div>
+                                        
+                                   
+                                    </div>
+                                    <div class="modal-footer">
+                                        @* <button type="submit" class="btn-primary">
+                                            <a asp-page="EventDetails" asp-page-handler="book" asp-route-id="@Model.TheEvent.Id" class="text-black">
+                                                Book
+                                            </a>
+                                        </button> *@
+
+
+                                        <button class="btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                Book
+                                            </button>
+                                            @* <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            You have booked for this event.
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> *@
+@*                                         
+                                            <button class="btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                Book
+                                            </button>
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Error</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div> 
+                                                        <div class="modal-body alert-danger">
+                                                            Please enter a valid number of tickets
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> *@
+                                        
+
+                                        <button type="button" class="btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.SimilarEvents.Count > 0)
+                {
+                <div class="desc-box-details">
+                    <h1>You might be interested in this event.</h1>
+                    <div class="similar-events">
+                        @* @foreach (var item in Model.SimilarEvents)
+                        {
+                            <a asp-page="EventDetails" asp-route-id="@item.Id">
+                                <button class="btn-details">
+                                    @item.Title
+                                </button>
+                            </a>
+
+                        } *@
+                        @{
+                                Random r = new Random();
+                                int index = r.Next(0, Model.SimilarEvents.Count);
+                        }
+                           
+                            <a asp-page="EventDetails" asp-route-id="@Model.SimilarEvents[@index].Id">
+                                <button class="btn-details">
+                                    @Model.SimilarEvents[@index].Title
+                                </button>
+                            </a>
+                        
+
+
+                    </div>
+                </div>
+                }
+        
+        </div>
+    </section>
+</div>
+
+
+

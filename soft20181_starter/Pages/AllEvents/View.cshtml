@@ -1,0 +1,113 @@
+﻿@page
+@model soft20181_starter.Pages.AllEvents.ViewModel
+@{
+    ViewData["Title"] = "View All Events";
+}
+
+<br />
+<br />
+
+@if (@Model.edited)
+{
+    <div class="alert alert-success" role="alert">
+        Event edited successfully!
+    </div>
+
+    Model.edited = false;
+
+}
+else if (@Model.added)
+{
+    <div class="alert alert-success" role="alert">
+        Event added successfully!
+    </div>
+    Model.added = false;
+}
+
+else if (@Model.deleted)
+{
+    <div class="alert alert-success" role="alert">
+        Event deleted successfully!
+    </div>
+
+    Model.deleted = false;
+}
+
+<div classs="event-details">
+    <div class="details-details">
+
+        <h2>View All Event Details</h2>
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Brief</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* @for (int i = 0; i < @Model.Bookings.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model.BookedEventsList[i].Title</td>
+                        <td>@Model.Bookings[i].quantity</td>
+                        <td>
+
+                            <a asp-page="Edit" asp-route-id="@Model.Bookings[i].EventId">
+                                <button type="submit" class="btn btn-primary">
+                                    Edit
+                                </button>
+                            </a>
+
+                            <a asp-page-handler="delete" asp-route-id="@Model.Bookings[i].EventId">
+                                <button type="submit" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </a>
+
+                        </td>
+                    </tr>
+                } *@
+
+                @foreach (var Event in Model.Events)
+                {
+                    <tr>
+                        <th scope="row">@Event.Id</th>
+                        <td>@Event.Title</td>
+                        <td>@Event.Brief</td>
+                        <td>@Event.Category</td>
+                        <td>@Event.FullDate</td>
+                        <td>@Event.Time</td>
+                        <td>@Event.FullLocation</td>
+                        <td>@Event.Price</td>
+                        <td>@Event.AgeGroup</td>
+                        <td>
+                            <a asp-page="Edit" asp-route-id="@Event.Id">
+                                <button type="submit" class="btn btn-primary">
+                                    Edit
+                                </button>
+                            </a>
+                            <a asp-page="Edit" asp-route-id="@Event.Id" asp-page-handler="delete">
+                                <button type="submit" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+
+    </div>
+</div>

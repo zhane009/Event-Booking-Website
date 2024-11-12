@@ -1,0 +1,28 @@
+﻿@page
+@model soft20181_starter.Pages.Manage.AddRoleModel
+@{
+    ViewData["Title"] = "Add a new Role";
+}
+
+@if (Model.Exists)
+{
+    <div class="alert alert-danger" role="alert">
+        The role already exists
+    </div>
+}
+
+<div class="contact-form">
+    <h2>Add a new Role to the System</h2>
+    <div>
+        <form method="post" class="row g-2">
+
+            <div class="form-element col-md-12">
+                <label class="form-label">Name of the New Role </label>
+                <input asp-for="@Model.NewRole" type="text" value="@Model.NewRole"/>
+                <span asp-validation-for="@Model.NewRole"></span>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@page
+@model soft20181_starter.Pages.ManageUser.ViewUsersModel
+@{
+    ViewData["Title"] = "View All Users";
+}
+
+<br />
+<br />
+@if (Model.ChangePassword)
+{
+    <div class="alert alert-success" role="alert">
+        Password changed successfully!
+    </div>
+    Model.ChangePassword = false;
+}
+else if (Model.Delete){
+    <div class="alert alert-success" role="alert">
+        User deleted successfully!
+    </div>
+    Model.Delete = false;
+}
+else if (Model.ChangeRole){
+    <div class="alert alert-success" role="alert">
+        Role changed successfully!
+    </div>
+    Model.ChangeRole = false;
+}
+<div classs="event-details">
+    <div class="details-details">
+
+        <h2>View All User Details</h2>
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Date of Birth</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < @Model.Users.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model.Users[i].Email</td>
+                        <td>@Model.Users[i].firstName</td>
+                        <td>@Model.Users[i].lastName</td>
+                        <td>@Model.Users[i].roleName</td>
+                        <td>@Model.Users[i].dateOfBirth</td>
+                        <td>
+                            <a asp-page="ChangePassword" asp-route-id="@Model.Users[i].Id">
+                                <button class="btn btn-primary">
+                                    Change Password
+                                </button>
+                            </a>
+                            <a asp-page="ChangePassword" asp-page-handler="delete" asp-route-id="@Model.Users[i].Id">
+                                <button class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </a>
+                            <a asp-page="ChangeRole" asp-route-id="@Model.Users[i].Id">
+                                <button class="btn btn-danger">
+                                    Change Roles
+                                </button>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
